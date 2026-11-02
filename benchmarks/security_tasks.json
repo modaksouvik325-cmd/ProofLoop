@@ -1,0 +1,53 @@
+
+[
+  {
+    "id": "SEC-001",
+    "title": "Hardcoded credentials",
+    "code": "API_KEY = 'sk_test_example123456'\npassword = 'admin123'\n",
+    "expected_findings": [
+      "Hardcoded credentials",
+      "Sensitive information stored in source code"
+    ],
+    "severity": "high"
+  },
+  {
+    "id": "SEC-002",
+    "title": "Unsafe command execution",
+    "code": "import subprocess\nimport sys\n\ndef run_command(user_input):\n    subprocess.run(user_input, shell=True)\n",
+    "expected_findings": [
+      "Command injection risk",
+      "Unsafe shell execution"
+    ],
+    "severity": "high"
+  },
+  {
+    "id": "SEC-003",
+    "title": "Unsafe deserialization",
+    "code": "import pickle\n\ndef load_data(file_path):\n    with open(file_path, 'rb') as file:\n        return pickle.load(file)\n",
+    "expected_findings": [
+      "Unsafe deserialization",
+      "Untrusted pickle data can execute arbitrary code"
+    ],
+    "severity": "high"
+  },
+  {
+    "id": "SEC-004",
+    "title": "Path traversal",
+    "code": "from pathlib import Path\n\ndef read_file(filename):\n    path = Path('/app/uploads') / filename\n    return path.read_text()\n",
+    "expected_findings": [
+      "Potential path traversal",
+      "User-controlled filename is not restricted to the intended directory"
+    ],
+    "severity": "medium"
+  },
+  {
+    "id": "SEC-005",
+    "title": "Insecure YAML loading",
+    "code": "import yaml\n\ndef load_config(file_path):\n    with open(file_path, 'r') as file:\n        return yaml.load(file, Loader=yaml.Loader)\n",
+    "expected_findings": [
+      "Unsafe YAML deserialization",
+      "Unsafe YAML loader"
+    ],
+    "severity": "high"
+  }
+]
